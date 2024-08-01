@@ -5,3 +5,6 @@ body{
   background-color: rgba(2, 2, 2, 0.781);
   color: white;
 }
+nav .active{
+  color:#149eca
+}
