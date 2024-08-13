@@ -1,15 +1,15 @@
-import { FC, TextareaHTMLAttributes } from "react"
+import { TextareaHTMLAttributes } from "react";
 
-interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{}
+interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-const TextArea : FC <IProps> = ({...rest}) => {
+const Textarea = ({ ...rest }: IProps) => {
   return (
-  <textarea className="border-[1px] border-gray-300 shadow-md foucs:border-[#149eca] foucs:outline-none foucs-ring-1" 
-  rows={6}
-  
-  {...rest}
-  />
-  )
-}
+    <textarea
+      className="border-[1px] border-gray-300 shadow-md focus:border-[#149eca] focus:outline-none focus:ring-1 focus:ring-[#149eca] rounded-lg px-3 py-3 text-md w-full bg-transparent"
+      rows={6}
+      {...rest}
+    />
+  );
+};
 
-export default TextArea
+export default Textarea;

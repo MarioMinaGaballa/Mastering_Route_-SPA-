@@ -1,56 +1,57 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from "react-router-dom";
-
-import HomePage from "../Pages";
-import AboutPage from "../Pages/About";
-import ContactPage from "../Pages/ContactPage";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import RootLayout from "../Pages/Layout";
-import QuickStartPage from "../Learn";
+import ErrorHandler from "../ErrorRoute/ErrorHandler";
+import HomePage from "../Pages";
+import ContactPage from "../Pages/ContactPage";
+import AboutPage from "../Pages/About";
+import ContributePage from "../Pages/Contribute";
+import PrivateRoute from "../auth/PrivateRoute";
+import LoginPage from "../Pages/Login";
 import LearnLayout from "../Learn/Layout";
-import ThinkingInReact from "../Learn/ThinkingInReact.tsx";
-import Installation from "../Learn/Installation.tsx";
-import Contribute from "../Pages/Contribute.tsx";
-import Login from "./../Pages/Login";
-import PrivateRoute from "../auth/PrivateRoute.tsx";
-import ErrorRouteHandler from "../ErrorRoute/ErrorHandler.tsx";
+import QuickStartPage from "../Learn";
+import ThinkingInReactPage from "../Learn/ThinkingInReact";
+import InstallationPage from "../Learn/Installation";
+import PageNotFound from "../Pages/PageNotFound";
 
-const isloggedIn = true;
-const userData:{email:string} | null =isloggedIn ?{email :"email@gmail.com"} :null;
+
+const isLoggedIn = false;
+const userData: { email: string } | null = isLoggedIn ? { email: "email@gmail.com" } : null;
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Root Layout */}
-      <Route path="/" element={<RootLayout />}  errorElement={<ErrorRouteHandler/>}>
+      <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
         <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="about" element={<AboutPage />} />
         <Route
           path="contribute"
           element={
-            <PrivateRoute isAllowed={isloggedIn} redirectPath="/login" data={userData}>
-              <Contribute />
+            <PrivateRoute isAllowed={isLoggedIn} redirectPath="/login" data={userData}>
+              <ContributePage />
             </PrivateRoute>
           }
         />
         <Route
           path="login"
           element={
-          <PrivateRoute isAllowed={!isloggedIn} redirectPath="/contribute" data={userData}>
-             <Login/>
-          </PrivateRoute>}
+            <PrivateRoute isAllowed={!isLoggedIn} redirectPath="/contribute" data={userData}>
+              <LoginPage />
+            </PrivateRoute>
+          }
         />
       </Route>
+
       {/* Learn Layout */}
       <Route path="/learn" element={<LearnLayout />}>
         <Route index element={<QuickStartPage />} />
-        <Route path="thinking-in-react" element={<ThinkingInReact />} />
-        <Route path="installation" element={<Installation />} />
-        <Route path="contribute" element={<Contribute />} />
+        <Route path="thinking-in-react" element={<ThinkingInReactPage />} />
+        <Route path="installation" element={<InstallationPage />} />
       </Route>
+
+      {/* Page Not Found */}
+      <Route path="*" element={<PageNotFound />} />
     </>
   )
 );

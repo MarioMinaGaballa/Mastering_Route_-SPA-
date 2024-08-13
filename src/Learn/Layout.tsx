@@ -1,16 +1,19 @@
-import LearnAside from "../compoents/LearnAside"
-import NavBar from "../compoents/NavBar"
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
+import LearnAside from "../compoents/LearnAside";
+import Navbar from "../compoents/NavBar";
 
 
-const Layout = () => {
+const LearnLayout = () => {
   return (
-    <div>
-      <NavBar/>
-      <LearnAside/>
-      <Outlet/>
-      </div>
-  )
-}
+    <div className="learn-layout">
+      <LearnAside />
 
-export default Layout
+      <div className="ml-72">
+        <Navbar />
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default LearnLayout;

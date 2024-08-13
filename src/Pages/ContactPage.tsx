@@ -1,12 +1,9 @@
-
-
-const ContactPage  = () => {
+const ContactPage = () => {
   return (
-<>
- <div>About page</div>
- <h1>Welocome to contact</h1>
-</>
-  )
-}
+    <div>
+      <h2>Contact Page</h2>
+    </div>
+  );
+};
 
-export default ContactPage
+export default ContactPage;
