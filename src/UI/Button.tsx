@@ -1,17 +1,17 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from "react"
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-childern:ReactNode;
+children:ReactNode;
 className:string;
 width?:"w-full"|"w-fit"
 }
 
-const Button : FC <IProps> = ({childern,className,width='w-full',...rest}) => {
+const Button : FC <IProps> = ({children,className,width='w-full',...rest}) => {
   return (
     <button
     className={`${className} ${width} rounded-lg text-white px-3 py-3 duration-200 font-medium bg-[#149eca]`}{...rest}
     >
-      {childern}
+      {children}
     </button>
   )
 }

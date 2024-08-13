@@ -15,21 +15,23 @@ import Installation from "../Learn/Installation.tsx";
 import Contribute from "../Pages/Contribute.tsx";
 import Login from "./../Pages/Login";
 import PrivateRoute from "../auth/PrivateRoute.tsx";
+import ErrorRouteHandler from "../ErrorRoute/ErrorHandler.tsx";
 
-const isloggedIn = false;
+const isloggedIn = true;
+const userData:{email:string} | null =isloggedIn ?{email :"email@gmail.com"} :null;
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Root Layout */}
-      <Route path="/" element={<RootLayout />}>
+      <Route path="/" element={<RootLayout />}  errorElement={<ErrorRouteHandler/>}>
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route
           path="contribute"
           element={
-            <PrivateRoute isAllowed={isloggedIn} redirectPath="/login">
+            <PrivateRoute isAllowed={isloggedIn} redirectPath="/login" data={userData}>
               <Contribute />
             </PrivateRoute>
           }
@@ -37,7 +39,7 @@ const router = createBrowserRouter(
         <Route
           path="login"
           element={
-          <PrivateRoute isAllowed={!isloggedIn} redirectPath="/contribute">
+          <PrivateRoute isAllowed={!isloggedIn} redirectPath="/contribute" data={userData}>
              <Login/>
           </PrivateRoute>}
         />

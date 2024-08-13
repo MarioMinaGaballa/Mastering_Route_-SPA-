@@ -7,10 +7,11 @@ interface IProps{
   isAllowed:boolean;
   redirectPath:string;
   children :ReactNode;
+  data?:unknown
 }
 
-const PrivateRoute = ({isAllowed,redirectPath,children}:IProps) => {
-    if(!isAllowed) return <Navigate  to={redirectPath}/>
+const PrivateRoute = ({isAllowed,redirectPath,children,data}:IProps) => {
+    if(!isAllowed) return <Navigate  to={redirectPath} state={data}/>
     return children
 }
 
